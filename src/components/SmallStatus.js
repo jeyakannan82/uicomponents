@@ -6,7 +6,7 @@ import { Card, CardBody } from "shards-react";
 
 import Chart from "../utils/chart.js";
 
-class SmallStats extends React.Component {
+class SmallStatus extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,44 +19,47 @@ class SmallStats extends React.Component {
         maintainAspectRatio: true,
         responsive: true,
         legend: {
-          display: false
+          display: true
         },
         tooltips: {
           enabled: true,
-          custom: false
+          custom: true
         },
         elements: {
           point: {
-            radius: 0
+            radius: 3
           },
           line: {
             tension: 0.33
           }
         },
-        scales: {
-          xAxes: [
-            {
-              gridLines: false,
-              ticks: {
-                display: false
-              }
-            }
-          ],
-          yAxes: [
-          {
-          ticks:{
-            min : 0,
-            stepSize : 1,
-            fontColor : "#000",
-            fontSize : 14,
-            suggestedMax: Math.max(...this.props.chartData[0].data) + 1
-          },
-          scaleLabel: false,
-          gridLines: false,
-          stacked: true
+    scales: {
+      yAxes: [{
+        ticks:{
+          min : 0,
+          stepSize : this.props.stepSize,
+          fontColor : "#000",
+          fontSize : 10
+        },
+        gridLines:{
+          color: "#000",
+          lineWidth:1,
+          zeroLineColor :"#000",
+          zeroLineWidth : 2
+        },
+        stacked: true
+      }],
+      xAxes: [{
+      	ticks:{
+          fontColor : "#000",
+          fontSize : 10
+        },
+        gridLines:{
+          color: "#fff",
+          lineWidth:1
         }
-          ]
-        }
+      }]
+    },
       },
       ...this.props.chartOptions
     };
@@ -131,15 +134,6 @@ class SmallStats extends React.Component {
     return (
       <Card small className={cardClasses}>
         <CardBody className={cardBodyClasses}>
-          <div className={innerWrapperClasses}>
-            <div className={dataFieldClasses}>
-              <span className={labelClasses}>{label}</span>
-              <h6 className={valueClasses}>{value}</h6>
-            </div>
-            <div className={innerDataFieldClasses}>
-              <span className={percentageClasses}>{percentage}</span>
-            </div>
-          </div>
           <canvas
             height={canvasHeight}
             ref={this.canvasRef}
@@ -151,7 +145,7 @@ class SmallStats extends React.Component {
   }
 }
 
-SmallStats.propTypes = {
+SmallStatus.propTypes = {
   /**
    * The Small Stats variation.
    */
@@ -190,7 +184,7 @@ SmallStats.propTypes = {
   chartLabels: PropTypes.array
 };
 
-SmallStats.defaultProps = {
+SmallStatus.defaultProps = {
   increase: true,
   percentage: 0,
   value: 0,
@@ -201,4 +195,4 @@ SmallStats.defaultProps = {
   chartLabels: []
 };
 
-export default SmallStats;
+export default SmallStatus;

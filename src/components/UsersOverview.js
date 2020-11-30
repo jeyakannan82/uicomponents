@@ -167,10 +167,10 @@ UsersOverview.defaultProps = {
           3100,
           4250
         ],
-        backgroundColor: "rgba(0,123,255,0.1)",
-        borderColor: "rgba(0,123,255,1)",
+        backgroundColor: "#6970d5",
+        borderColor: "black",
         pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgb(0,123,255)",
+        pointHoverBackgroundColor: "yellow",
         borderWidth: 1.5,
         pointRadius: 0,
         pointHoverRadius: 3
@@ -210,15 +210,15 @@ UsersOverview.defaultProps = {
           780,
           1200
         ],
-        backgroundColor: "rgba(255,65,105,0.1)",
-        borderColor: "rgba(255,65,105,1)",
+        backgroundColor: "#f38b4a",
+        borderColor: "#ffffff",
         pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgba(255,65,105,1)",
+        pointHoverBackgroundColor: "yellow",
         borderDash: [3, 3],
         borderWidth: 1,
         pointRadius: 0,
         pointHoverRadius: 2,
-        pointBorderColor: "rgba(255,65,105,1)"
+        pointBorderColor: "black"
       }
     ]
   }

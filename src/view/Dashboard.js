@@ -41,7 +41,7 @@ const Dashboard = ({ smallStats , custStats , polarChartData}) => (
     <Row>
 
       <Col lg="8" md="12" sm="12" className="mb-4">
-        <UsersOverview />
+         <CustomerSatisfactionScore />
       </Col>
 
       {/* Users by Device */}
@@ -54,7 +54,7 @@ const Dashboard = ({ smallStats , custStats , polarChartData}) => (
 
       {/* Users by Device */}
       <Col lg="8" md="12" sm="12" className="mb-4">
-        <CustomerSatisfactionScore />
+       <UsersOverview />
       </Col>
 
       {/* Users by Device */}
@@ -93,8 +93,8 @@ Dashboard.defaultProps = {
           label: "Today",
           fill: "start",
           borderWidth: 1.5,
-          backgroundColor: "rgba(20, 184, 216, 6.1)",
-          borderColor: "rgb(30, 184, 216)",
+          backgroundColor:  "#6970d5",
+          borderColor: "#fff",
           data: [1, 2, 1, 3, 5, 4, 7]
         }
       ]
@@ -112,8 +112,8 @@ Dashboard.defaultProps = {
           label: "Today",
           fill: "start",
           borderWidth: 1.5,
-          backgroundColor: 'orange',
-          borderColor: "rgb(23,30,113)",
+          backgroundColor: '#56d798',
+          borderColor: "#fff",
           data: [1, 2, 3, 3, 3, 4, 4]
         }
       ]
@@ -132,7 +132,7 @@ Dashboard.defaultProps = {
           label: "Today",
           fill: "start",
           borderWidth: 1.5,
-          backgroundColor: "green",
+          backgroundColor: "#f38b4a",
           borderColor: "rgb(255,180,30)",
           data: [2, 3, 3, 3, 4, 3, 3]
         }

@@ -113,9 +113,9 @@ NPSScore.defaultProps = {
         hoverBorderColor: "#ffffff",
         data: [2.3, 10.1, 60.2],
         backgroundColor: [
-          "rgba(0,123,255,0.9)",
-          "rgba(0,123,255,0.5)",
-          "rgba(0,123,255,0.3)"
+          "#ff8397",
+          "#56d798",
+          "#f38b4a",
         ]
       }
     ],
