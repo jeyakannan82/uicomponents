@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/data-grid": "^4.0.0-alpha.12",
     "bootstrap": "^4.3.1",
     "camelize": "^1.0.0",
     "chart.js": "^2.7.3",
@@ -23,6 +25,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "react-svg-radar-chart": "^1.2.0",
+    "react-table": "^7.6.2",
     "shards-react": "^1.0.3",
     "shortid": "^2.2.14",
     "styled-components": "^4.3.2"
@@ -47,5 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000/"
 }

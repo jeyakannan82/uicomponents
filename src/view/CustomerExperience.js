@@ -9,6 +9,7 @@ import SmallStatus from "../components/SmallStatus";
 import UsersOverview from "../components/UsersOverview";
 import UsersByDevice from "../components/UsersByDevice";
 import TopReferrals from "../components/TopReferrals";
+import ExpandableTableComponent from "../components/ExpandableTableComponent";
 
 const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badExp }) => (
   <Container  className="">
@@ -152,51 +153,7 @@ const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badEx
         </Tab.Pane>
         <Tab.Pane eventKey="third">
   {/* Countries Table List */}
-                <table className="table table-light mb-0">
-
-                        <thead className="experience">
-                          <tr>
-                            <th scope="col" className="border-0">
-                              Customer Name
-                            </th>
-                            <th scope="col" className="border-0">
-                              Origin
-                            </th>
-                            <th scope="col" className="border-0">
-                              Response
-                            </th>
-                            <th scope="col" className="border-0">
-                              Failed Count
-                            </th>
-                            <th scope="col" className="border-0">
-                              Success Count
-                            </th>
-                            <th scope="col" className="border-0">
-                              User Failures
-                            </th>
-                            <th scope="col" className="border-0">
-                              User Experience
-                            </th>
-                            <th scope="col" className="border-0">
-                             Meet Expectation
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                    {badExp.map((country, idx) => (
-                      <tr key={idx}>
-                        <td> {country.user}</td>
-                        <td>{country.title}</td>
-                        <td>{country.response}</td>
-                        <td>{country.failedCout}</td>
-                        <td>{country.successCount}</td>
-                        <td>{country.userFailureCount}</td>
-                        <td>{country.experience}</td>
-                        <td>{country.meet}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+<ExpandableTableComponent />
         </Tab.Pane>
       </Tab.Content>
     </Col>

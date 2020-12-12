@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col } from "shards-react";
+
 
 import PageTitle from "../components/PageTitle";
 import SmallStats from "../components/SmallStats";
@@ -9,15 +10,47 @@ import UsersOverview from "../components/UsersOverview";
 import UsersByDevice from "../components/UsersByDevice";
 import CustomerSatisfactionScore from "../components/CustomerSatisfactionScore";
 import NPSScore from "../components/NPSScore";
+import getDashboardData from '../hooks/getDashboardData';
+import RangeDatePicker from "../components/RangeDatePicker";
 
-const Dashboard = ({ smallStats , custStats , polarChartData}) => (
+const Dashboard = ({ smallStats , custStats , polarChartData}) => {
+const [npsScore, satisfactionScore, errMessage] = getDashboardData();
+const [npsProbs, setNpsProbs] = React.useState(0);
+const onRefresh = useCallback(async () => {
+    await Promise.all([
+      npsScore(),
+      satisfactionScore(),
+       setNpsProbs({
+        title: "NPS Score",
+        chartData: {
+          datasets: [
+            {
+              hoverBorderColor: "#ffffff",
+              data: npsScore,
+              backgroundColor: [
+                "#ff8397",
+                "#56d798",
+                "#f38b4a",
+              ]
+            }
+          ],
+          labels: ["Promoters", "Passives", "Detractors"]
+        }
+      }),
+    ]);
 
+  }, [npsScore, satisfactionScore]);
+return(
   <Container  className="">
     {/* Page Header */}
     <Row noGutters className="page-header py-4">
       <PageTitle subtitle="Application Overview" className="text-sm-left mb-3" />
     </Row>
-
+  <Row className="page-header py-4">
+    <Col lg="12" md="12" sm="12" className="mb-4">
+      <RangeDatePicker />
+    </Col>
+  </Row>
     {/* Small Stats Blocks */}
     <Row>
       {smallStats.map((stats, idx) => (
@@ -59,11 +92,11 @@ const Dashboard = ({ smallStats , custStats , polarChartData}) => (
 
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
-        <NPSScore />
+        <NPSScore npsScore={npsProbs}/>
       </Col>
      </Row>
-  </Container>
-);
+  </Container>);
+}
 
 Dashboard.propTypes = {
   /**

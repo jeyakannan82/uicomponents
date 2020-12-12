@@ -3,7 +3,7 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { NavigationBar } from './components/NavigationBar';
-import { Home } from './Home';
+import  Home from './Home';
 import { Experience } from './Experience';
 import { Suggestions } from './Suggestions';
 import { NoMatch } from './NoMatch';
@@ -13,7 +13,9 @@ import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 import "./shards-dashboard/styles/healer.css";
 
 
-function App() {
+class App extends React.Component {
+
+render() {
   return (
     <React.Fragment>
       <Router>
@@ -30,6 +32,7 @@ function App() {
       </Router>
     </React.Fragment>
   );
+  }
 }
 
 export default App;

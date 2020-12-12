@@ -5,14 +5,36 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
 
 class CustomerSatisfactionScore extends React.Component {
+ constructor(props) {
+     super(props);
+     console.log(props);
+      this.state = {
+             data : null,
+             month_score: 0
+           };
+
+   }
+
+  componentWillMount() {
+    const npsResponse = fetch('http://localhost:5000/aztecs/custScores?countryTotal=IN')
+                      .then(response => response.json())
+                      .then(response_data => {
+                        console.log(response_data);
+                        this.setState({ data : response_data.satisfactions, month_score : response_data.monthScore })
+                        return response_data;
+                      });
+
+  }
 	render() {
+	const data_points = this.state.data;
+	const month_score = this.state.month_score;
 		const options = {
 			animationEnabled: true,
 			title: {
 				text: "Customer Satisfaction"
 			},
 			subtitles: [{
-				text: "71% Positive",
+				text: month_score+"% Positive",
 				verticalAlign: "center",
 				fontSize: 24,
 				dockInsidePlotArea: true
@@ -22,13 +44,7 @@ class CustomerSatisfactionScore extends React.Component {
 				showInLegend: true,
 				indexLabel: "{name}: {y}",
 				yValueFormatString: "#,###'%'",
-				dataPoints: [
-					{ name: "Unsatisfied", y: 5 },
-					{ name: "Very Unsatisfied", y: 31 },
-					{ name: "Very Satisfied", y: 40 },
-					{ name: "Satisfied", y: 17 },
-					{ name: "Neutral", y: 7 }
-				]
+				dataPoints: data_points
 			}]
 		}
 		return (

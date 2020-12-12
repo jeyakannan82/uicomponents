@@ -7,6 +7,6 @@ const Wrapper = styled.div`
 `;
 export const NoMatch = () => (
   <Wrapper>
-    <h2>Aztecs</h2>
+    <h4>Please contact Aztecs team for any question</h4>
   </Wrapper>
 )
