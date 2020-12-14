@@ -20,6 +20,9 @@ import getDashboardData from '../hooks/getDashboardData';
 import RangeDatePicker from "../components/RangeDatePicker";
 import DateTimePicker from 'react-datetime-picker';
 import "../assets/range-date-picker.css";
+import ResponseChart from "../components/ResponseChart";
+import ReliabilityChart from "../components/ReliabilityChart";
+import AvailabilityChart from "../components/AvailabilityChart";
 
 
 const Dashboard = ({ smallStats , custStats , polarChartData}) => {
@@ -67,7 +70,22 @@ return(
           />
         </Col>
       ))}
-    </Row>
+     </Row>
+    <Row>
+      {/* Reliability Chart*/}
+           <Col lg="4" md="4" sm="4" className="mb-4">
+          <ReliabilityChart />
+            </Col>
+        {/* Availability Chart */}
+        <Col lg="4" md="4" sm="4" className="mb-4">
+         <AvailabilityChart />
+        </Col>
+
+        {/* Response Chart */}
+        <Col lg="4" md="4" sm="4" className="mb-4">
+        <ResponseChart />
+        </Col>
+     </Row>
 
     <Row>
 
@@ -111,7 +129,7 @@ Dashboard.defaultProps = {
         osY: [40,50.30]
   },
   smallStats: [
-    {
+    /*{
       label: "Reliability",
       value: "98%",
       percentage: "4.7%",
@@ -168,7 +186,7 @@ Dashboard.defaultProps = {
           data: [2, 3, 3, 3, 4, 3, 3]
         }
       ]
-    }
+    }*/
   ],
     custStats: [
       {
@@ -194,3 +212,4 @@ Dashboard.defaultProps = {
 };
 
 export default Dashboard;
+

@@ -9,6 +9,11 @@ import SmallStatus from "../components/SmallStatus";
 import UsersOverview from "../components/UsersOverview";
 import UsersByDevice from "../components/UsersByDevice";
 import TopReferrals from "../components/TopReferrals";
+import SuccessChart from "../components/SuccessChart";
+import UpTimeChart from "../components/UpTime";
+import SearchTypeChart from "../components/SearchType"
+//import GoodExperience from "../components/GoodExperience"
+
 import ExpandableTableComponent from "../components/ExpandableTableComponent";
 
 const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badExp }) => (
@@ -35,10 +40,28 @@ const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badEx
             decrease={stats.decrease}
           />
         </Col>
+
       ))}
+    </Row>
+    <Row>
+     {/* Success Failure Chart*/}
+          <Col lg="4" md="4" sm="4" className="mb-4">
+                                   <SuccessChart />
+           </Col>
+       {/* UpTime DownTime Chart */}
+       <Col lg="4" md="4" sm="4" className="mb-4">
+        <UpTimeChart />
+       </Col>
+
+       {/* Action Type Chart */}
+       <Col lg="4" md="4" sm="4" className="mb-4">
+       <SearchTypeChart />
+       </Col>
     </Row>
     <CardBody className="p-0">
 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+
+
   <Row>
     <Col sm={2} >
       <Nav variant="pills" className="flex-column">
@@ -62,7 +85,7 @@ const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badEx
                         <thead className="experience">
                           <tr>
                             <th scope="col" className="border-0">
-                              Customer Name
+                              User Perm ID
                             </th>
                             <th scope="col" className="border-0">
                               Origin
@@ -90,10 +113,10 @@ const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badEx
                         <tbody>
                     {goodExp.map((country, idx) => (
                       <tr key={idx}>
-                        <td> {country.user}</td>
+                        <td>{country.user}</td>
                         <td>{country.title}</td>
                         <td>{country.response}</td>
-                        <td>{country.failedCout}</td>
+                        <td>{country.failedCount}</td>
                         <td>{country.successCount}</td>
                         <td>{country.userFailureCount}</td>
                         <td>{country.experience}</td>
@@ -136,19 +159,19 @@ const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badEx
                           </tr>
                         </thead>
                         <tbody>
-                    {averageExp.map((country, idx) => (
-                      <tr key={idx}>
-                        <td> {country.user}</td>
-                        <td>{country.title}</td>
-                        <td>{country.response}</td>
-                        <td>{country.failedCout}</td>
-                        <td>{country.successCount}</td>
-                        <td>{country.userFailureCount}</td>
-                        <td>{country.experience}</td>
-                        <td>{country.meet}</td>
-                      </tr>
-                    ))}
-                  </tbody>
+                      {goodExp.map((country, idx) => (
+                                           <tr key={idx}>
+                                             <td>{country.user}</td>
+                                             <td>{country.title}</td>
+                                             <td>{country.response}</td>
+                                             <td>{country.failedCount}</td>
+                                             <td>{country.successCount}</td>
+                                             <td>{country.userFailureCount}</td>
+                                             <td>{country.experience}</td>
+                                             <td>{country.meet}</td>
+                                           </tr>
+                                         ))}
+                       </tbody>
                 </table>
         </Tab.Pane>
         <Tab.Pane eventKey="third">
@@ -173,68 +196,7 @@ CustomerExperience.propTypes = {
 };
 
 CustomerExperience.defaultProps = {
-  smallStats: [
-    {
-      label: "Failures/Success Transactions in %",
-      value: "98%",
-      percentage: "4.7%",
-      type: 'bar',
-      stepSize : 25,
-      increase: true,
-      chartLabels: ["User Failures", "Server Failures", "Success"],
-      attrs: { md: "6", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: "#f38b4a",
-          borderColor: "#f38b4a",
-          data: [23, 10, 77]
-        }
-      ]
-    },
-    {
-      label: "Uptime/Downtime",
-      type: 'bar',
-      value: "100%",
-      percentage: "12.4",
-      stepSize :25,
-      increase: true,
-      chartLabels: ["Up Time", "Down Time"],
-      attrs: { md: "6", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: '#7B68EE',
-          borderColor: "#7B68EE",
-          data: [ 98 , 2]
-        }
-      ]
-    },
-    {
-      label: "Response for top users",
-      value: "2.34 S",
-      percentage: "3.8%",
-      increase: false,
-      decrease: true,
-      stepSize : 1,
-      type: 'bar',
-      chartLabels: ["search", "view", "update", "delete"],
-      attrs: { md: "4", sm: "6" },
-      datasets: [
-        {
-          label: "Today",
-          fill: "start",
-          borderWidth: 1.5,
-          backgroundColor: "#56d798",
-          borderColor: "#56d798",
-          data: [3, 1, 1.4, 0.9]
-        }
-      ]
-    }
+  smallStats:[
   ],
     goodExp : [
       {

@@ -72,7 +72,24 @@ div.aztech-container .container {
       border-radius: 4px;
       height: 400px !important;
   }
-
+.title{
+    letter-spacing: .125rem;
+    color: #818ea3;
+    font-size: .625rem;
+}
+.Title-root-3 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size:15px !important;
+}
+.MuiTypography-h5 {
+    font-family: "Impact", "Calibri", "Lucida Grande", "Lucida Sans Unicode", "Arial", sans-serif !important;
+    color: #333;
+    font-weight: 400 !important;
+    line-height: 1.334 !important;
+    letter-spacing: 0em !important;
+    }
   .dXSneh {
       position: absolute;
       height: 1100px;

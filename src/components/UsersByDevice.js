@@ -65,7 +65,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 			exportEnabled: true,
 			theme: "light1", // "light1", "dark1", "dark2"
 			title:{
-				text: "User Activity by api"
+				text: "User Activity by api",
+				fontSize: 15
 			},
 			data: [{
 				type: "pie",

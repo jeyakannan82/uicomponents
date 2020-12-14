@@ -52,7 +52,8 @@ class CustomerSatisfactionScore extends React.Component {
 		const options = {
 			animationEnabled: true,
 			title: {
-				text: "Customer Satisfaction"
+				text: "Customer Satisfaction",
+				fontSize: 15
 			},
 			subtitles: [{
 				text: month_score+"% Positive",

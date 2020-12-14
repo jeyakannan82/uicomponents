@@ -55,7 +55,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
  			exportFileName: "NPS Score",
  			exportEnabled: true,
  			title:{
- 				text: "NPS Score"
+ 				text: "NPS Score",
+ 				fontSize: 15
  			},
  			data: [{
  				type: "pie",
