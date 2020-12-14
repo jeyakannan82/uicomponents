@@ -9,8 +9,29 @@ class CustomerSatisfactionScore extends React.Component {
      super(props);
      console.log(props);
       this.state = {
-             data : null,
-             month_score: 0
+             data : [
+                        {
+                          "name": "Very satisfied",
+                          "y": 0.0
+                        },
+                        {
+                          "name": "Satisfied",
+                          "y": 12.0
+                        },
+                        {
+                          "name": "Neutral",
+                          "y": 33.0
+                        },
+                        {
+                          "name": "Un satisfied",
+                          "y": 46.0
+                        },
+                        {
+                          "name": "Very unsatisfied",
+                          "y": 9.0
+                        }
+                      ],
+             month_score: 75
            };
 
    }

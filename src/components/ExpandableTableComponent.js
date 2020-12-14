@@ -46,11 +46,6 @@ function Table({ columns: userColumns, data }) {
                     })}
                 </tbody>
             </table>
-            <br />
-            <div>Showing the first 20 results of {rows.length} rows</div>
-            <pre>
-                <code>{JSON.stringify({ expanded: expanded }, null, 2)}</code>
-            </pre>
         </div >
     )
 }
@@ -79,37 +74,41 @@ function ExpandableTableComponent() {
                     ) : null,
             },
             {
-                Header: 'Name',
+                Header: 'UserId',
                 columns: [
                     {
-                        Header: 'First Name',
+                        Header: 'UserId',
                         accessor: 'firstName',
-                    },
-                    {
-                        Header: 'Last Name',
-                        accessor: 'lastName',
-                    },
+                    }
                 ],
             },
             {
                 Header: 'Info',
                 columns: [
                     {
-                        Header: 'Age',
-                        accessor: 'age',
+                        Header: 'Response',
+                        accessor: 'response',
                     },
                     {
-                        Header: 'Visits',
-                        accessor: 'visits',
+                        Header: 'Failed Count',
+                        accessor: 'ifCount',
                     },
                     {
-                        Header: 'Status',
-                        accessor: 'status',
+                        Header: 'Success Count',
+                        accessor: 'okCount',
                     },
                     {
-                        Header: 'Profile Progress',
-                        accessor: 'progress',
+                        Header: 'User Failures',
+                        accessor: 'ufCount',
                     },
+                    {
+                        Header: 'User Experience',
+                        accessor: 'userExperience',
+                    },
+                     {
+                         Header: 'Meet Expectation',
+                         accessor: 'meetExpectation',
+                     },
                 ],
             },
         ],
@@ -118,103 +117,97 @@ function ExpandableTableComponent() {
 
     const data = [
         {
-            "firstName": "motion-cq4n1",
-            "lastName": "gold-c44qg",
-            "age": 5,
-            "visits": 89,
-            "progress": 70,
-            "status": "relationship",
+            "firstName": "7384728374",
+            "response": 2,
+            "ifCount": 23,
+            "okCount": 67578,
+            "ufCount": 10,
+            "userExperience": "99.1%",
+            "meetExpectation": "Yes",
             "subRows": [
                 {
-                    "firstName": "digestion-67zau",
-                    "lastName": "presence-f0w8w",
-                    "age": 17,
-                    "visits": 89,
-                    "progress": 67,
-                    "status": "relationship",
-                    "subRows": [
-                        {
-                            "firstName": "destruction-xbuvr",
-                            "lastName": "growth-mrmei",
-                            "age": 2,
-                            "visits": 28,
-                            "progress": 48,
-                            "status": "complicated"
-                        }
-                    ]
+                "firstName": "7384728374",
+                "response": 1.2,
+                "ifCount": 30,
+                "okCount": 87987,
+                "ufCount": 70,
+                "userExperience": "98.12%",
+                "meetExpectation": "Yes"
                 },
                 {
-                    "firstName": "rifle-1kwh3",
-                    "lastName": "awareness-qmhrt",
-                    "age": 0,
-                    "visits": 32,
-                    "progress": 65,
-                    "status": "complicated",
-                    "subRows": [
-                        {
-                            "firstName": "aftermath-g4ydv",
-                            "lastName": "mixture-hykkg",
-                            "age": 11,
-                            "visits": 94,
-                            "progress": 70,
-                            "status": "complicated"
-                        }
-                    ]
-                }
+                    "firstName": "7384728374",
+                    "response": 3,
+                    "ifCount": 89,
+                    "okCount": 432,
+                    "ufCount": 60,
+                    "userExperience": "70.16%",
+                    "meetExpectation": "No"
+                },
+                 {
+                     "firstName": "7384728374",
+                     "response": 2,
+                     "ifCount": 89,
+                     "okCount": 4244,
+                     "ufCount": 60,
+                     "userExperience": "70.16%",
+                     "meetExpectation": "No"
+                 },
+                  {
+                      "firstName": "7384728374",
+                      "response": 2,
+                      "ifCount": 89,
+                      "okCount": 4244,
+                      "ufCount": 60,
+                      "userExperience": "70.16%",
+                      "meetExpectation": "No"
+                  }
             ]
         },
         {
-            "firstName": "philosophy-068q6",
-            "lastName": "sticks-07qdm",
-            "age": 9,
-            "visits": 47,
-            "progress": 6,
-            "status": "relationship",
+            "firstName": "3565578",
+            "response": 5,
+            "ifCount": 19,
+            "okCount": 76699,
+            "ufCount": 40,
+            "userExperience": "30.13%",
+            "meetExpectation": "No",
             "subRows": [
                 {
-                    "firstName": "hole-eeai8",
-                    "lastName": "historian-yhikw",
-                    "age": 26,
-                    "visits": 32,
-                    "progress": 97,
-                    "status": "relationship",
-                    "subRows": [
-                        {
-                            "firstName": "stitch-lsuft",
-                            "lastName": "suggestion-j7r61",
-                            "age": 17,
-                            "visits": 23,
-                            "progress": 99,
-                            "status": "single"
-                        },
-                        {
-                            "firstName": "world-2wi9s",
-                            "lastName": "courage-q0fvw",
-                            "age": 20,
-                            "visits": 27,
-                            "progress": 1,
-                            "status": "relationship"
-                        }
-                    ]
+                "firstName": "3565578",
+                "response": 1,
+                "ifCount": 19,
+                "okCount": 2345,
+                "ufCount": 70,
+                "userExperience": "95.1%",
+                "meetExpectation": "Yes"
                 },
                 {
-                    "firstName": "pen-y8060",
-                    "lastName": "magazine-uxycr",
-                    "age": 6,
-                    "visits": 57,
-                    "progress": 83,
-                    "status": "single",
-                    "subRows": [
-                        {
-                            "firstName": "problem-393nd",
-                            "lastName": "product-efasy",
-                            "age": 12,
-                            "visits": 13,
-                            "progress": 1,
-                            "status": "single"
-                        }
-                    ]
-                }
+                    "firstName": "3565578",
+                    "response": 3,
+                    "ifCount": 89,
+                    "okCount": 4567,
+                    "ufCount": 70,
+                    "userExperience": "99.1%",
+                    "meetExpectation": "Yes"
+                },
+             {
+                 "firstName": "3565578",
+                 "response": 3,
+                 "ifCount": 19,
+                 "okCount": 2313,
+                 "ufCount": 44,
+                 "userExperience": "99.1%",
+                 "meetExpectation": "Yes"
+             },
+             {
+                 "firstName": "3565578",
+                 "response": 2,
+                 "ifCount": 10,
+                 "okCount": 333,
+                 "ufCount": 41,
+                 "userExperience": "98.1%",
+                 "meetExpectation": "Yes"
+             }
             ]
         }
     ]

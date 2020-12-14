@@ -1,56 +1,54 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col } from "shards-react";
+import { Container, Row, Col,
+  InputGroup,
+  DatePicker,
+  InputGroupAddon,
+  InputGroupText, Button } from "shards-react";
+  import classNames from "classnames";
 
 
 import PageTitle from "../components/PageTitle";
 import SmallStats from "../components/SmallStats";
 import MediamStats from "../components/MediamStats";
 import UsersOverview from "../components/UsersOverview";
+import CustomerExperienceTrend from "../components/CustomerExperienceTrend";
 import UsersByDevice from "../components/UsersByDevice";
 import CustomerSatisfactionScore from "../components/CustomerSatisfactionScore";
 import NPSScore from "../components/NPSScore";
 import getDashboardData from '../hooks/getDashboardData';
 import RangeDatePicker from "../components/RangeDatePicker";
+import DateTimePicker from 'react-datetime-picker';
+import "../assets/range-date-picker.css";
+
 
 const Dashboard = ({ smallStats , custStats , polarChartData}) => {
-const [npsScore, satisfactionScore, errMessage] = getDashboardData();
-const [npsProbs, setNpsProbs] = React.useState(0);
+const [activityByAction, experience, reliability, availability,response] = getDashboardData();
+const [value, onChange] = useState(new Date());
+const { className } =  React.useState(0);
+const classes = classNames(className, "d-flex", "my-auto", "date-range");
 const onRefresh = useCallback(async () => {
-    await Promise.all([
-      npsScore(),
-      satisfactionScore(),
-       setNpsProbs({
-        title: "NPS Score",
-        chartData: {
-          datasets: [
-            {
-              hoverBorderColor: "#ffffff",
-              data: npsScore,
-              backgroundColor: [
-                "#ff8397",
-                "#56d798",
-                "#f38b4a",
-              ]
-            }
-          ],
-          labels: ["Promoters", "Passives", "Detractors"]
-        }
-      }),
-    ]);
+ window.location.reload(false);
 
-  }, [npsScore, satisfactionScore]);
+  }, [activityByAction, experience, reliability, availability,response]);
 return(
   <Container  className="">
     {/* Page Header */}
-    <Row noGutters className="page-header py-4">
-      <PageTitle subtitle="Application Overview" className="text-sm-left mb-3" />
-    </Row>
-  <Row className="page-header py-4">
-    <Col lg="12" md="12" sm="12" className="mb-4">
-      <RangeDatePicker />
-    </Col>
-  </Row>
+      <Row noGutters className="page-header py-4">
+
+        <Col lg="6" md="12" sm="12" className="mb-4">
+           <PageTitle subtitle="Application Overview" className="text-sm-left mb-4" />
+        </Col>
+
+        {/* Users by Device */}
+        <Col  lg="6" md="12" sm="12" className="text-sm-right mb-4">
+           <InputGroup className={classes}>
+              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
+              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
+              <InputGroupAddon type="append"> <Button theme="secondary" onClick={onRefresh}>Check</Button></InputGroupAddon>
+            </InputGroup>
+        </Col>
+      </Row>
     {/* Small Stats Blocks */}
     <Row>
       {smallStats.map((stats, idx) => (
@@ -87,12 +85,12 @@ return(
 
       {/* Users by Device */}
       <Col lg="8" md="12" sm="12" className="mb-4">
-       <UsersOverview />
+       <CustomerExperienceTrend />
       </Col>
 
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
-        <NPSScore npsScore={npsProbs}/>
+        <NPSScore/>
       </Col>
      </Row>
   </Container>);

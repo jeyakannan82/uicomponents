@@ -43,7 +43,6 @@ class RangeDatePicker extends React.Component {
     return (
       <InputGroup className={classes}>
         <DatePicker
-          size="sm"
           selected={this.state.startDate}
           onChange={this.handleStartDateChange}
           placeholderText="Start Date"
@@ -51,7 +50,6 @@ class RangeDatePicker extends React.Component {
           className="text-center"
         />
         <DatePicker
-          size="sm"
           selected={this.state.endDate}
           onChange={this.handleEndDateChange}
           placeholderText="End Date"

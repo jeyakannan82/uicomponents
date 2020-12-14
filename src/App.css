@@ -46,3 +46,38 @@ div.aztech-container .container {
     font-size: 14px;
 
   }
+
+  .col-specific-font {
+
+      background: #fffff;
+      font-size: 10px;
+      font-weight: 0;
+      height: auto;
+      padding: .4375rem .75rem;
+      font-size: .8125rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      border: 1px solid #e1e5eb;
+      font-weight: 300;
+      will-change: border-color,box-shadow;
+      border-radius: .25rem;
+      box-shadow: none;
+      transition: box-shadow 250ms cubic-bezier(.27,.01,.38,1.06),border 250ms cubic-bezier(.27,.01,.38,1.06);
+      text-align: right!important;
+
+  }
+
+  .MuiPaper-rounded {
+      border-radius: 4px;
+      height: 400px !important;
+  }
+
+  .dXSneh {
+      position: absolute;
+      height: 1100px;
+      width: 75px;
+      z-index: 1;
+      background-image: linear-gradient(to right top,#2a163d,#2b1d47,#2c2550,#2b2c5a,#293463,#333e73,#3e4883,#495293,#6960ad,#8c6cc5,#b278db,#da83ee);
+      padding-top: 10px;
+  }

@@ -3,8 +3,11 @@ import {useState, useEffect} from 'react';
 import aztecsApi from '../apis/aztecsApi';
 
 const getDashboardData = () => {
-  const [satisfactionScore, setSatisfactionScore] = useState('');
-  const [npsScore, setNpsScore] = useState('');
+  const [activityByAction, setActivityByAction] = useState('');
+  const [experience, setExperience] = useState('');
+  const [reliability, setReliability] = useState('');
+  const [availability, setAvailability] = useState('');
+  const [response, setResponse] = useState('');
   const [errMessage, setErrorMessage] = useState('');
 
   const getStats = async () => {
@@ -24,12 +27,14 @@ const getDashboardData = () => {
         console.log('No Data received');
         throw new Error();
       }
-      setSatisfactionScore(resp.data.satisfaction);
-      setNpsScore(resp.data.npsScore);
-      console.log(resp.data.npsScore)
+      setActivityByAction(resp.data.activityByAction);
+      setExperience(resp.data.experience);
+      setReliability(resp.data.reliability);
+      setAvailability(resp.data.availability);
+      setResponse(resp.data.response);
       setErrorMessage('');
     } catch (err) {
-      setSatisfactionScore({});
+      setActivityByAction({});
       setErrorMessage(err.message);
     }
   };
@@ -38,7 +43,7 @@ const getDashboardData = () => {
     getStats();
   }, []);
 
-  return [npsScore, satisfactionScore, errMessage];
+  return [activityByAction, experience, reliability, availability,response];
 };
 
 export default getDashboardData;
