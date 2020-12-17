@@ -19,7 +19,20 @@ var CanvasJS = CanvasJSReact.CanvasJS;
      super(props);
      console.log(props);
       this.state = {
-             data : null
+             data :  [
+                        {
+                          "label": "Success",
+                          "y": 66.0
+                        },
+                        {
+                          "label": "User Failures",
+                          "y": 20.0
+                        },
+                        {
+                          "label": "Server Failures",
+                          "y": 14.0
+                        }
+                      ]
            };
 
    }

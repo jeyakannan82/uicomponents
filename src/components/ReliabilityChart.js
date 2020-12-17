@@ -19,7 +19,48 @@ var CanvasJS = CanvasJSReact.CanvasJS;
      super(props);
      console.log(props);
       this.state = {
-             data : null
+             data : [
+                        {
+                          "x": 1,
+                          "y": 87
+                        },
+                        {
+                          "x": 2,
+                          "y": 97
+                        },
+                        {
+                          "x": 3,
+                          "y": 89
+                        },
+                        {
+                          "x": 4,
+                          "y": 97
+                        },
+                        {
+                          "x": 5,
+                          "y": 99
+                        },
+                        {
+                          "x": 6,
+                          "y": 97
+                        },
+                        {
+                          "x": 7,
+                          "y": 98
+                        },
+                        {
+                          "x": 8,
+                          "y": 99
+                        },
+                        {
+                          "x": 9,
+                          "y": 95
+                        },
+                        {
+                          "x": 10,
+                          "y": 92
+                        }
+                      ]
            };
 
    }

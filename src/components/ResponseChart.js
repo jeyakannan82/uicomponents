@@ -10,6 +10,7 @@ import {
   CardFooter
 } from "shards-react";
 import CanvasJSReact from '../assets/canvasjs.react';
+import DateObject from "react-date-object";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
 
@@ -19,7 +20,48 @@ var CanvasJS = CanvasJSReact.CanvasJS;
      super(props);
      console.log(props);
       this.state = {
-             data : null
+             data : [
+                        {
+                          "x": new Date(1,0),
+                          "y": 4
+                        },
+                        {
+                          "x": new Date(2,0),
+                          "y": 4
+                        },
+                        {
+                          "x": new Date(3,0),
+                          "y": 1
+                        },
+                        {
+                          "x": new Date(4,0),
+                          "y": 1
+                        },
+                        {
+                          "x": new Date(5,0),
+                          "y": 1
+                        },
+                        {
+                          "x": new Date(6,0),
+                          "y": 1
+                        },
+                        {
+                          "x": new Date(7,0),
+                          "y": 0
+                        },
+                        {
+                          "x": new Date(8,0),
+                          "y": 1
+                        },
+                        {
+                          "x": new Date(9,0),
+                          "y": 1
+                        },
+                        {
+                          "x": new Date(10,0),
+                          "y": 2
+                        }
+                      ]
            };
 
    }
@@ -28,7 +70,19 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     const responseChart = fetch('http://localhost:5000/aztecs/dashboards?countryTotal=IN')
                       .then(response => response.json())
                       .then(response_data => {
-                        this.setState({ data : response_data.response })
+                        var dataPoints = [];
+                        for (var i = 0; i <= response_data.response.length; i++) {
+                        console.log(response_data.response[i])
+                        var dateTime = new DateObject(response_data.response[i].x);
+                        dateTime.format("YYYY-MM-DDThh:mm:ss.SSSZ");
+
+
+                         dataPoints.push({
+                             x: dateTime,
+                             y: response_data.response[i].y
+                           });
+                        }
+                        this.setState({ data : dataPoints })
                         return response_data;
                       });
 
@@ -41,6 +95,9 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     			animationEnabled: true,
     			exportEnabled: true,
     			theme: "light2",
+    			 axisX :{
+                        labelAngle: -90
+                      },
     			title:{
     				text: "Response",
     				fontFamily:'Impact',
@@ -48,9 +105,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     			},
     			data: [{
     				type: "splineArea",
-    				percentage: "3.8%",
                     increase: false,
-                    decrease: true,
+                    decrease: false,
     				dataPoints: data_points
     			}]
     		}

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { Container, Row, CardBody } from "shards-react";
+import { Container, Row, Col,
+  InputGroup,
+  DatePicker,
+  InputGroupAddon,
+  InputGroupText, Button, CardBody  } from "shards-react";
+  import classNames from "classnames";
 
-import { Tabs, Tab, Nav, Col } from "react-bootstrap";
+import { Tabs, Tab, Nav } from "react-bootstrap";
 
 import PageTitle from "../components/PageTitle";
 import SmallStatus from "../components/SmallStatus";
@@ -12,16 +17,40 @@ import TopReferrals from "../components/TopReferrals";
 import SuccessChart from "../components/SuccessChart";
 import UpTimeChart from "../components/UpTime";
 import SearchTypeChart from "../components/SearchType"
+import RangeDatePicker from "../components/RangeDatePicker";
+import DateTimePicker from 'react-datetime-picker';
+import "../assets/range-date-picker.css";
+import getDashboardData from '../hooks/getDashboardData';
 //import GoodExperience from "../components/GoodExperience"
 
 import ExpandableTableComponent from "../components/ExpandableTableComponent";
 
-const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badExp }) => (
-  <Container  className="">
+const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badExp }) => {
+const [activityByAction, experience, reliability, availability,response] = getDashboardData();
+const [value, onChange] = useState(new Date());
+const { className } =  React.useState(0);
+const classes = classNames(className, "d-flex", "my-auto", "date-range");
+const onRefresh = useCallback(async () => {
+ window.location.reload(false);
+
+  }, [activityByAction, experience, reliability, availability,response]);
+ return ( <Container  className="">
     {/* Page Header */}
-    <Row noGutters className="page-header py-4">
-      <PageTitle subtitle="Application Overview" className="text-sm-left mb-3" />
-    </Row>
+      <Row noGutters className="page-header py-4">
+
+        <Col lg="6" md="12" sm="12" className="mb-4">
+           <PageTitle subtitle="Customer Experience" className="text-sm-left mb-4" />
+        </Col>
+
+        {/* Users by Device */}
+        <Col  lg="6" md="12" sm="12" className="text-sm-right mb-4">
+           <InputGroup className={classes}>
+              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
+              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
+              <InputGroupAddon type="append"> <Button theme="secondary" onClick={onRefresh}>Check</Button></InputGroupAddon>
+            </InputGroup>
+        </Col>
+      </Row>
 
     {/* Small Stats Blocks */}
     <Row>
@@ -184,8 +213,8 @@ const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badEx
 </Tab.Container>
 
     </CardBody>
-  </Container>
-);
+  </Container>);
+}
 
 CustomerExperience.propTypes = {
   /**

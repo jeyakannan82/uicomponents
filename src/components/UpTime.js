@@ -19,7 +19,16 @@ var CanvasJS = CanvasJSReact.CanvasJS;
      super(props);
      console.log(props);
       this.state = {
-             data : null
+             data :  [
+                        {
+                          "label": "Up Time",
+                          "y": 80.0
+                        },
+                        {
+                          "label": "Down Time",
+                          "y": 20.0
+                        }
+                      ]
            };
 
    }

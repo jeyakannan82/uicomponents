@@ -8,10 +8,39 @@ const GridWrapper = styled.div`
   margin-right: 6em;
   grid-template-columns: repeat(12, 1fr);
   grid-auto-rows: minmax(25px, auto);
-`; 
-export const About = () => (
-  <GridWrapper>
-    <h2>About Page</h2>
-    <p>Az techs comes here</p>
-  </GridWrapper>
+`;
+import SpellChecker from "simple-spellchecker"
+
+const { ipcRenderer , electron} = window.require("electron")
+export const About = () => {
+ SpellChecker.getDictionary("fr-FR", function(err, dictionary) {
+      if(!err) {
+          var misspelled = ! dictionary.spellCheck('maisonn');
+          if(misspelled) {
+              var suggestions = dictionary.getSuggestions('maisonn');
+          }
+      }
+  });
+  SpellChecker.getDictionary("en-US", "../node_modules/simple-spellchecker/dict", function(err, result) {
+      if(!err) {
+          myDictionary = result;
+      }
+  });
+  electron.ipcMain.on('checkspell', function(event, word) {
+      var res = null;
+      if(myDictionary != null && word != null) {
+          res = myDictionary.spellCheck(word);
+      }
+      event.returnValue = res;
+  });
+return(
+electron.webFrame.setSpellCheckProvider("en-US", false, {
+    spellCheck: function(text) {
+        var res = ipcRenderer.sendSync('checkspell', text);
+        return res != null? res : true;
+    }
+})
+);
 )
+
+}

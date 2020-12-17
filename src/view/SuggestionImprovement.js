@@ -54,18 +54,6 @@ const SuggestionImprovement = ({ smallStats , countries }) => (
       <Col  className="solutionTreee" lg="12" md="12" sm="12" className="mb-4">
 
       <Tree content="main" type="Solutions" canHide open style={treeStyles}>
-        <Tree content="hello" type={<span style={typeStyles}>🙀</span>} canHide />
-        <Tree content="subtree with children" canHide>
-          <Tree content="hello" />
-          <Tree content="sub-subtree with children">
-            <Tree content="child 1" style={{ color: '#63b1de' }} />
-            <Tree content="child 2" style={{ color: '#63b1de' }} />
-            <Tree content="child 3" style={{ color: '#63b1de' }} />
-          </Tree>
-          <Tree content="hello" />
-        </Tree>
-        <Tree content="hello" canHide />
-        <Tree content="hello" canHide />
       <Tree content="Response time degraded"  open style={treeStyles} type={<span style={typeStyles}>🙀</span>} canHide>
           <Tree content="Need to improve the performance for the below api">
             <Tree content="Data Base call took more time" style={{ color: '#63b1de' }} />

@@ -19,7 +19,28 @@ var CanvasJS = CanvasJSReact.CanvasJS;
      super(props);
      console.log(props);
       this.state = {
-             data : null
+             data : [
+                        {
+                          "label": "Search",
+                          "y": 50.0
+                        },
+                        {
+                          "label": "Retrieve",
+                          "y": 24.0
+                        },
+                        {
+                          "label": "Suggest",
+                          "y": 10.0
+                        },
+                        {
+                          "label": "Download",
+                          "y": 6.0
+                        },
+                        {
+                          "label": "Multi Search",
+                          "y": 10.0
+                        }
+                      ]
            };
 
    }
