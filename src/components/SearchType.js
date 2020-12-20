@@ -22,11 +22,11 @@ var CanvasJS = CanvasJSReact.CanvasJS;
              data : [
                         {
                           "label": "Search",
-                          "y": 50.0
+                          "y": 2.0
                         },
                         {
                           "label": "Retrieve",
-                          "y": 24.0
+                          "y": 3.0
                         },
                         {
                           "label": "Suggest",
@@ -34,11 +34,11 @@ var CanvasJS = CanvasJSReact.CanvasJS;
                         },
                         {
                           "label": "Download",
-                          "y": 6.0
+                          "y": 0.2
                         },
                         {
                           "label": "Multi Search",
-                          "y": 10.0
+                          "y": 5.0
                         }
                       ]
            };
@@ -61,7 +61,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 			animationEnabled: true,
 			theme: "light2",
 			title: {
-				text: "Response for Top Users",
+				text: "Response time by services in seconds",
 				fontFamily:'Impact',
 				fontSize: 15
 			},
@@ -73,7 +73,6 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 			data: [{
 				type: "column",
 				indexLabel: "{y}",
-				yValueFormatString: "#,###'%'",
 				dataPoints: data_points
 			}]
 		}

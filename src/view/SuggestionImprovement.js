@@ -6,8 +6,7 @@ import PageTitle from "../components/PageTitle";
 import SmallStats from "../components/SmallStats";
 import SuggestionChart from "../components/SuggestionChart";
 import SuggestionScore from "../components/SuggestionScore";
-import ErrorRate from "../components/ErrorRate";
-import UsersByDevice from "../components/UsersByDevice";
+import ResonseCodeChart from "../components/ResonseCodeChart";
 import TopReferrals from "../components/TopReferrals";
 import Tree from 'react-animated-tree'
 
@@ -35,17 +34,13 @@ const SuggestionImprovement = ({ smallStats , countries }) => (
         <Row>
 
       {/* Users by Device */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
+      <Col lg="6" md="9" sm="12" className="mb-4">
         <SuggestionChart />
       </Col>
         {/* Users by Device */}
-        <Col lg="4" md="6" sm="12" className="mb-4">
-          <ErrorRate   />
+        <Col lg="6" md="9" sm="12" className="mb-4">
+          <ResonseCodeChart   />
         </Col>
-      {/* Users by Device */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
-        <SuggestionScore />
-      </Col>
 
      </Row>
 

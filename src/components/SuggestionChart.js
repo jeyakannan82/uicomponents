@@ -2,6 +2,7 @@ import React from 'react';
 
 import RadarChart from 'react-svg-radar-chart';
 import 'react-svg-radar-chart/build/css/index.css'
+import ApexCharts from 'apexcharts'
 import {
   Row,
   Col,
@@ -12,7 +13,102 @@ import {
   CardFooter
 } from "shards-react";
 export default class SuggestionChart extends React.Component {
+
+  constructor(props) {
+     super(props);
+     console.log(props);
+      this.state = {
+             data : [
+                          {
+                            data: {
+                                    "400": 0.2,
+                                    "401": 0.7,
+                                    "403": 0.3,
+                                    "404": 0.6,
+                                    "405": 0.4,
+                                    "406": 0.2,
+                                    "408": 0.6,
+                                    "415": 0.5,
+                                    "429": 0.5,
+                                    "500": 0.8,
+                                    "502": 0.2,
+                                    "503": 0.2,
+                                    "504": 0.1
+                            },
+                            meta: { color: "red" }
+                          },
+                          {
+                            data: {
+                                    "400": 0.7,
+                                    "401": 0.5,
+                                    "403": 0.5,
+                                    "404": 0.6,
+                                    "405": 0.6,
+                                    "406": 0.2,
+                                    "408": 0.2,
+                                    "415": 0.3,
+                                    "429": 0.4,
+                                    "500": 0.5,
+                                    "502": 0.6,
+                                    "503": 0.7,
+                                    "504": 0.9
+                             },
+                            meta: { color: 'red' }
+                          },
+                          {
+                                data: {
+                                    "400": 0.2,
+                                    "401": 0.3,
+                                    "403": 0.3,
+                                    "404": 0.4,
+                                    "405": 0.5,
+                                    "406": 0.7,
+                                    "408": 0.4,
+                                    "415": 0.6,
+                                    "429": 0.8,
+                                    "500": 0.3,
+                                    "502": 0.3,
+                                    "503": 0.7,
+                                    "504": 0.9
+                                },
+                                meta: { color: '#58FCEC' }
+                            }
+                        ],
+                 captions : {
+                       // columns
+                                    "400": "Bad Request",
+                                    "401": "Unauthorized",
+                                    "403": "Forbidden",
+                                    "404": "Not Found",
+                                    "405": "Method Not Allowed",
+                                    "406": "Not Acceptable",
+                                    "408": "Request Timeout",
+                                    "415": "Unsupported Media Type",
+                                    "429": "Too Many Requests",
+                                    "500": "Internal Server Error",
+                                    "502": "Bad Gateway",
+                                    "503": "Service Unavailable",
+                                    "504": "Gateway Timed out"
+                     }
+           };
+
+   }
+
+  componentWillMount() {
+    const npsResponse = fetch('http://localhost:5000/aztecs/recommendation')
+                      .then(response => response.json())
+                      .then(response_data => {
+                        console.log(response_data.radarData);
+                        this.setState({ data : response_data.radarData, caption : response_data.caption })
+                        return response_data;
+                      });
+
+  }
+
   render() {
+   	    const data = this.state.data
+   	    const caption = this.state.captions
+   	    console.log(caption)
     const tooltipstyle = {
         position: 'relative',
         display: 'inline-block',
@@ -33,48 +129,6 @@ export default class SuggestionChart extends React.Component {
         zIndex: '1',
     }
 
- 	 const data = [
-      {
-        data: {
-          battery: 0.5,
-          design: .7,
-          useful: 0.985,
-          speed: 0.57,
-          weight: 0.7
-        },
-        meta: { color: 'blue' }
-      },
-      {
-        data: {
-          battery: 0.6,
-          design: .85,
-          useful: 0.5,
-          speed: 0.6,
-          weight: 0.7
-        },
-        meta: { color: 'red' }
-      },
-      {
-            data: {
-              battery: 0.7,
-              design: .8,
-              useful: 0.9,
-              speed: 0.67,
-              weight: 0.8
-            },
-            meta: { color: '#58FCEC' }
-        }
-    ];
-
-    const captions = {
-      // columns
-      battery: 'Reliability',
-      design: 'Availability',
-      useful: 'Performance',
-      speed: 'User Friendly',
-      weight: 'Relevance Score'
-    };
-
     const noSmoothing = points => {
         let d = 'M' + points[0][0].toFixed(4) + ',' + points[0][1].toFixed(4);
         for (let i = 1; i < points.length; i++) {
@@ -86,7 +140,7 @@ export default class SuggestionChart extends React.Component {
       const defaultOptions = {
         size: 200,
         axes: true, // show axes?
-        scales: 3, // show scale circles?
+        scales: 10, // show scale circles?
         captions: true, // show captions?
         captionMargin: 10,
         dots: true, // show dots?
@@ -122,14 +176,7 @@ export default class SuggestionChart extends React.Component {
         </CardHeader>
         <CardBody className="d-flex py-0">
         <RadarChart
-            captions={{
-              // columns
-              battery: 'Performance',
-              design: 'Server Failures',
-              useful: 'User Failures',
-              speed: 'User Activity',
-              weight: 'Others'
-            }}
+            captions={caption}
             data={data}
             size={400}
             options={defaultOptions}

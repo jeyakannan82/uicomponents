@@ -11,8 +11,6 @@ import { Tabs, Tab, Nav } from "react-bootstrap";
 
 import PageTitle from "../components/PageTitle";
 import SmallStatus from "../components/SmallStatus";
-import UsersOverview from "../components/UsersOverview";
-import UsersByDevice from "../components/UsersByDevice";
 import TopReferrals from "../components/TopReferrals";
 import SuccessChart from "../components/SuccessChart";
 import UpTimeChart from "../components/UpTime";

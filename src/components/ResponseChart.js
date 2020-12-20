@@ -65,7 +65,11 @@ var CanvasJS = CanvasJSReact.CanvasJS;
            };
 
    }
-
+ sortMyArray(myArray ){
+     return myArray.sort((a, b) => {
+      return a.x < b.x ? 1 : -1;
+  });
+}
   componentWillMount() {
     const responseChart = fetch('http://localhost:5000/aztecs/dashboards?countryTotal=IN')
                       .then(response => response.json())
@@ -73,16 +77,12 @@ var CanvasJS = CanvasJSReact.CanvasJS;
                         var dataPoints = [];
                         for (var i = 0; i <= response_data.response.length; i++) {
                         console.log(response_data.response[i])
-                        var dateTime = new DateObject(response_data.response[i].x);
-                        dateTime.format("YYYY-MM-DDThh:mm:ss.SSSZ");
+                        var dateTime = new DateObject(response_data.response[i]);
 
-
-                         dataPoints.push({
-                             x: dateTime,
-                             y: response_data.response[i].y
-                           });
                         }
-                        this.setState({ data : dataPoints })
+                        console.log("response chart---")
+                        console.log(response_data.response)
+                        this.setState({ data : response_data.response })
                         return response_data;
                       });
 

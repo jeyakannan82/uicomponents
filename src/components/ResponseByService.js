@@ -13,7 +13,7 @@ import CanvasJSReact from '../assets/canvasjs.react';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
 
- class UsersByDevice extends React.Component {
+ class ResponseByService extends React.Component {
 
    constructor(props) {
      super(props);
@@ -86,4 +86,4 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 		);
 	}
  }
- export default UsersByDevice;
+ export default ResponseByService;

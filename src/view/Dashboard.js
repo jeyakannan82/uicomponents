@@ -11,9 +11,8 @@ import { Container, Row, Col,
 import PageTitle from "../components/PageTitle";
 import SmallStats from "../components/SmallStats";
 import MediamStats from "../components/MediamStats";
-import UsersOverview from "../components/UsersOverview";
 import CustomerExperienceTrend from "../components/CustomerExperienceTrend";
-import UsersByDevice from "../components/UsersByDevice";
+import ResponseByService from "../components/ResponseByService";
 import CustomerSatisfactionScore from "../components/CustomerSatisfactionScore";
 import NPSScore from "../components/NPSScore";
 import getDashboardData from '../hooks/getDashboardData';
@@ -52,25 +51,6 @@ return(
             </InputGroup>
         </Col>
       </Row>
-    {/* Small Stats Blocks */}
-    <Row>
-      {smallStats.map((stats, idx) => (
-        <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
-          <SmallStats
-            id={`small-stats-${idx}`}
-            variation="1"
-            type={stats.type}
-            chartData={stats.datasets}
-            chartLabels={stats.chartLabels}
-            label={stats.label}
-            value={stats.value}
-            percentage={stats.percentage}
-            increase={stats.increase}
-            decrease={stats.decrease}
-          />
-        </Col>
-      ))}
-     </Row>
     <Row>
       {/* Reliability Chart*/}
            <Col lg="4" md="4" sm="4" className="mb-4">
@@ -95,7 +75,7 @@ return(
 
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
-        <UsersByDevice />
+        <ResponseByService />
       </Col>
     </Row>
 
