@@ -75,14 +75,21 @@ var CanvasJS = CanvasJSReact.CanvasJS;
                       .then(response => response.json())
                       .then(response_data => {
                         var dataPoints = [];
-                        for (var i = 0; i <= response_data.response.length; i++) {
-                        console.log(response_data.response[i])
-                        var dateTime = new DateObject(response_data.response[i]);
+
+                        for (var cnt = 0; cnt <= response_data.response.length; cnt++) {
+                        console.log(response_data.response[cnt])
+                        if(response_data.response[cnt]){
+                            dataPoints.push({
+                                               x: new Date(response_data.response[cnt].x),
+                                               y: response_data.response[cnt].y
+                                             });
+                        }
+
 
                         }
                         console.log("response chart---")
                         console.log(response_data.response)
-                        this.setState({ data : response_data.response })
+                        this.setState({ data : dataPoints})
                         return response_data;
                       });
 
@@ -106,6 +113,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     			data: [{
     				type: "splineArea",
                     increase: false,
+                    color: "rgb(185, 116, 85)",
+                    showInLegend: true,
                     decrease: false,
     				dataPoints: data_points
     			}]

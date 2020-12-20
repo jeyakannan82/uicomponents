@@ -69,7 +69,17 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     const responseChart = fetch('http://localhost:5000/aztecs/dashboards?countryTotal=IN')
                       .then(response => response.json())
                       .then(response_data => {
-                        this.setState({ data : response_data.response })
+                    var dataPoints = [];
+                    for(var cnt = 0 ;cnt<response_data.reliability.length;cnt++ )
+                    {
+
+                              dataPoints.push({
+                                                 x: new Date(response_data.reliability[cnt].x),
+                                                 y: 100
+                                               });
+
+                    }
+                      this.setState({ data : dataPoints })
                         return response_data;
                       });
 
@@ -90,6 +100,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     			data: [{
     				type: "splineArea",
     				percentage: "3.8%",
+    				showInLegend: true,
+    				color: "rgb(105, 189, 210)",
                     increase: false,
                     decrease: true,
     				dataPoints: data_points

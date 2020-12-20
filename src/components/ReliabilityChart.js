@@ -21,43 +21,43 @@ var CanvasJS = CanvasJSReact.CanvasJS;
       this.state = {
              data : [
                         {
-                          "x": 1,
+                          "x":  new Date("2020-12-11T23:59:59Z"),
                           "y": 87
                         },
                         {
-                          "x": 2,
+                          "x": new Date("2020-12-12T23:59:59Z"),
                           "y": 97
                         },
                         {
-                          "x": 3,
+                          "x": new Date("2020-12-13T23:59:59Z"),
                           "y": 89
                         },
                         {
-                          "x": 4,
+                          "x": new Date("2020-12-14T23:59:59Z"),
                           "y": 97
                         },
                         {
-                          "x": 5,
+                          "x": new Date("2020-12-15T23:59:59Z"),
                           "y": 99
                         },
                         {
-                          "x": 6,
+                          "x": new Date("2020-12-16T23:59:59Z"),
                           "y": 97
                         },
                         {
-                          "x": 7,
+                          "x": new Date("2020-12-17T23:59:59Z"),
                           "y": 98
                         },
                         {
-                          "x": 8,
+                          "x": new Date("2020-12-18T23:59:59Z"),
                           "y": 99
                         },
                         {
-                          "x": 9,
+                          "x": new Date("2020-12-19T23:59:59Z"),
                           "y": 95
                         },
                         {
-                          "x": 10,
+                          "x": new Date("2020-12-20T23:59:59Z"),
                           "y": 92
                         }
                       ]
@@ -69,7 +69,18 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     const responseChart = fetch('http://localhost:5000/aztecs/dashboards?countryTotal=IN')
                       .then(response => response.json())
                       .then(response_data => {
-                        this.setState({ data : response_data.response })
+                      console.log(response_data.reliability)
+                      var dataPoints = [];
+                      for(var cnt = 0 ;cnt<response_data.reliability.length;cnt++ )
+                      {
+
+                                dataPoints.push({
+                                                   x: new Date(response_data.reliability[cnt].x),
+                                                   y: response_data.reliability[cnt].y
+                                                 });
+
+                      }
+                        this.setState({ data : dataPoints })
                         return response_data;
                       });
 
@@ -89,8 +100,10 @@ var CanvasJS = CanvasJSReact.CanvasJS;
     			},
     			data: [{
     				type: "splineArea",
-    				percentage: "3.8%",
+    				showInLegend: true,
+    				color: "rgb(237, 184, 121)",
                     increase: false,
+                    xValueFormatString: "YYYY-MM-DDThh:mm:sZ",
                     decrease: true,
     				dataPoints: data_points
     			}]
