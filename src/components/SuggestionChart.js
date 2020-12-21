@@ -95,7 +95,7 @@ export default class SuggestionChart extends React.Component {
    }
 
   componentWillMount() {
-    const npsResponse = fetch('http://localhost:5000/aztecs/recommendation')
+    const npsResponse = fetch('http://localhost:5000/aztecs/radarData')
                       .then(response => response.json())
                       .then(response_data => {
                         console.log(response_data.radarData);

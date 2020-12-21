@@ -34,7 +34,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
    }
 
   componentWillMount() {
-    const responseChart = fetch('http://localhost:5000/aztecs/recommendation')
+    const responseChart = fetch('http://localhost:5000/aztecs/errorCode')
                       .then(response => response.json())
                       .then(response_data => {
                         console.log(response_data.errorCode)

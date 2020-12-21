@@ -47,7 +47,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 
   componentWillMount() {
 
-    const successResponse = fetch('http://localhost:5000/aztecs/experience?countryTotal=IN')
+    const successResponse = fetch('http://localhost:5000/aztecs/category?countryTotal=IN')
                       .then(response => response.json())
                       .then(response_data => {
                         this.setState({ data : response_data.category })

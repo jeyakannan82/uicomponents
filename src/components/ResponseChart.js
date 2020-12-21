@@ -72,7 +72,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
   });
 }
  componentDidMount() {
-    const responseChart = fetch('http://localhost:5000/aztecs/dashboards?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
+    const responseChart = fetch('http://localhost:5000/aztecs/response?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
                       .then(response => response.json())
                       .then(response_data => {
                         var dataPoints = [];
@@ -102,6 +102,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 			const options = {
     			animationEnabled: true,
     			exportEnabled: true,
+    			zoomEnabled: true,
     			theme: "light2",
     			 axisX :{
                         labelAngle: -90
