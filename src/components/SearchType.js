@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import DatePicker from "react-date-picker";
 import PropTypes from "prop-types";
 import {
   Row,
@@ -41,11 +42,11 @@ var CanvasJS = CanvasJSReact.CanvasJS;
                           "y": 5.0
                         }
                       ]
-           };
-
-   }
+  };
+}
 
   componentWillMount() {
+
     const successResponse = fetch('http://localhost:5000/aztecs/experience?countryTotal=IN')
                       .then(response => response.json())
                       .then(response_data => {

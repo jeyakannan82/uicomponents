@@ -65,8 +65,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 
    }
 
-  componentWillMount() {
-    const responseChart = fetch('http://localhost:5000/aztecs/dashboards?countryTotal=IN')
+  componentDidMount() {
+    const responseChart = fetch('http://localhost:5000/aztecs/dashboards?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
                       .then(response => response.json())
                       .then(response_data => {
                     var dataPoints = [];

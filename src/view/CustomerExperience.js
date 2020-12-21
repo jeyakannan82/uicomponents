@@ -19,7 +19,8 @@ import RangeDatePicker from "../components/RangeDatePicker";
 import DateTimePicker from 'react-datetime-picker';
 import "../assets/range-date-picker.css";
 import getDashboardData from '../hooks/getDashboardData';
-//import GoodExperience from "../components/GoodExperience"
+import GoodExperience from "../components/GoodExperience"
+import AverageExperience from "../components/AverageExperience"
 
 import ExpandableTableComponent from "../components/ExpandableTableComponent";
 
@@ -137,20 +138,7 @@ const onRefresh = useCallback(async () => {
                             </th>
                           </tr>
                         </thead>
-                        <tbody>
-                    {goodExp.map((country, idx) => (
-                      <tr key={idx}>
-                        <td>{country.user}</td>
-                        <td>{country.title}</td>
-                        <td>{country.response}</td>
-                        <td>{country.failedCount}</td>
-                        <td>{country.successCount}</td>
-                        <td>{country.userFailureCount}</td>
-                        <td>{country.experience}</td>
-                        <td>{country.meet}</td>
-                      </tr>
-                    ))}
-                  </tbody>
+                       <GoodExperience />
                 </table>
         </Tab.Pane>
         <Tab.Pane eventKey="second">
@@ -160,7 +148,7 @@ const onRefresh = useCallback(async () => {
                         <thead className="experience">
                           <tr>
                             <th scope="col" className="border-0">
-                              Customer Name
+                              User Perm ID
                             </th>
                             <th scope="col" className="border-0">
                               Origin
@@ -185,20 +173,7 @@ const onRefresh = useCallback(async () => {
                             </th>
                           </tr>
                         </thead>
-                        <tbody>
-                      {goodExp.map((country, idx) => (
-                                           <tr key={idx}>
-                                             <td>{country.user}</td>
-                                             <td>{country.title}</td>
-                                             <td>{country.response}</td>
-                                             <td>{country.failedCount}</td>
-                                             <td>{country.successCount}</td>
-                                             <td>{country.userFailureCount}</td>
-                                             <td>{country.experience}</td>
-                                             <td>{country.meet}</td>
-                                           </tr>
-                                         ))}
-                       </tbody>
+                      <AverageExperience />
                 </table>
         </Tab.Pane>
         <Tab.Pane eventKey="third">

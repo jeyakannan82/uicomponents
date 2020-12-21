@@ -11,6 +11,7 @@ import {
 } from "shards-react";
 import CanvasJSReact from '../assets/canvasjs.react';
 import DateObject from "react-date-object";
+import moment from 'moment';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
 
@@ -70,8 +71,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
       return a.x < b.x ? 1 : -1;
   });
 }
-  componentWillMount() {
-    const responseChart = fetch('http://localhost:5000/aztecs/dashboards?countryTotal=IN')
+ componentDidMount() {
+    const responseChart = fetch('http://localhost:5000/aztecs/dashboards?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
                       .then(response => response.json())
                       .then(response_data => {
                         var dataPoints = [];

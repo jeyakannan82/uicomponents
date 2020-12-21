@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Container, Row, Col,
   InputGroup,
   DatePicker,
+  FormInput,
   InputGroupAddon,
   InputGroupText, Button } from "shards-react";
   import classNames from "classnames";
@@ -18,21 +19,23 @@ import NPSScore from "../components/NPSScore";
 import getDashboardData from '../hooks/getDashboardData';
 import RangeDatePicker from "../components/RangeDatePicker";
 import DateTimePicker from 'react-datetime-picker';
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 import "../assets/range-date-picker.css";
 import ResponseChart from "../components/ResponseChart";
 import ReliabilityChart from "../components/ReliabilityChart";
 import AvailabilityChart from "../components/AvailabilityChart";
+import moment from 'moment';
 
 
-const Dashboard = ({ smallStats , custStats , polarChartData}) => {
+const Dashboard = ({ smallStats , custStats , polarChartData, props}) => {
 const [activityByAction, experience, reliability, availability,response] = getDashboardData();
-const [value, onChange] = useState(new Date());
+const [startDate, setStartDate] = React.useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"));
+const [endDate, setEndDate] = React.useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"));
+const [value, onChange] = React.useState([new Date(), new Date()]);
+
 const { className } =  React.useState(0);
 const classes = classNames(className, "d-flex", "my-auto", "date-range");
-const onRefresh = useCallback(async () => {
- window.location.reload(false);
 
-  }, [activityByAction, experience, reliability, availability,response]);
 return(
   <Container  className="">
     {/* Page Header */}
@@ -44,38 +47,34 @@ return(
 
         {/* Users by Device */}
         <Col  lg="6" md="12" sm="12" className="text-sm-right mb-4">
-           <InputGroup className={classes}>
-              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
-              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
-              <InputGroupAddon type="append"> <Button theme="secondary" onClick={onRefresh}>Check</Button></InputGroupAddon>
-            </InputGroup>
+          <DateTimeRangePicker onChange={onChange} value ={value} className="text-center"/>
         </Col>
       </Row>
     <Row>
       {/* Reliability Chart*/}
            <Col lg="4" md="4" sm="4" className="mb-4">
-          <ReliabilityChart />
+          <ReliabilityChart dates ={value} key={value} />
             </Col>
         {/* Availability Chart */}
         <Col lg="4" md="4" sm="4" className="mb-4">
-         <AvailabilityChart />
+         <AvailabilityChart dates ={value} key={value} />
         </Col>
 
         {/* Response Chart */}
         <Col lg="4" md="4" sm="4" className="mb-4">
-        <ResponseChart />
+        <ResponseChart dates ={value} key={value} />
         </Col>
      </Row>
 
     <Row>
 
       <Col lg="8" md="12" sm="12" className="mb-4">
-         <CustomerSatisfactionScore />
+         <CustomerSatisfactionScore dates ={value} key={value} />
       </Col>
 
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
-        <ResponseByService />
+        <ResponseByService dates ={value} key={value} />
       </Col>
     </Row>
 
@@ -83,12 +82,12 @@ return(
 
       {/* Users by Device */}
       <Col lg="8" md="12" sm="12" className="mb-4">
-       <CustomerExperienceTrend />
+       <CustomerExperienceTrend dates ={value} key={value} />
       </Col>
 
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
-        <NPSScore/>
+        <NPSScore dates={value} key={value} />
       </Col>
      </Row>
   </Container>);
@@ -99,15 +98,13 @@ Dashboard.propTypes = {
    * The small stats dataset.
    */
   smallStats: PropTypes.array,
-  polarChartData : { msg: [], osY: [] }
+  dates : PropTypes.array,
+  startDate: PropTypes.object,
+  endDate: PropTypes.object,
+
 };
 
 Dashboard.defaultProps = {
-
-   polarChartData: {
-        msg: ['id1','id2','id3'],
-        osY: [40,50.30]
-  },
   smallStats: [
     /*{
       label: "Reliability",

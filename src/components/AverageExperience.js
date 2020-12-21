@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import {  Table } from "semantic-ui-react";
 
- class GoodExperience extends React.Component {
+ class AverageExperience extends React.Component {
 
    constructor(props) {
      super(props);
@@ -17,7 +17,7 @@ import {  Table } from "semantic-ui-react";
                            .then(response => response.json())
                            .then(response_data => {
                              console.log(response_data);
-                             this.setState({ data : response_data.goodExperience })
+                             this.setState({ data : response_data.averageExperience })
                              return response_data;
                            });
   }
@@ -25,7 +25,7 @@ import {  Table } from "semantic-ui-react";
 render() {
    const data = this.state.data;
        return(
-       <tbody>
+                   <tbody>
                             {data.map((country, idx) => (
                                            <tr key={idx}>
                                              <td>{country.userID}</td>
@@ -43,4 +43,4 @@ render() {
   }
 }
 
- export default GoodExperience;
+ export default AverageExperience;
