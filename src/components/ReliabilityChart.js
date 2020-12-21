@@ -18,55 +18,62 @@ var CanvasJS = CanvasJSReact.CanvasJS;
    constructor(props) {
      super(props);
      console.log(props);
+     if(props.reliability){
       this.state = {
-             data : [
-                        {
-                          "x":  new Date("2020-12-11T23:59:59Z"),
-                          "y": 87
-                        },
-                        {
-                          "x": new Date("2020-12-12T23:59:59Z"),
-                          "y": 97
-                        },
-                        {
-                          "x": new Date("2020-12-13T23:59:59Z"),
-                          "y": 89
-                        },
-                        {
-                          "x": new Date("2020-12-14T23:59:59Z"),
-                          "y": 97
-                        },
-                        {
-                          "x": new Date("2020-12-15T23:59:59Z"),
-                          "y": 99
-                        },
-                        {
-                          "x": new Date("2020-12-16T23:59:59Z"),
-                          "y": 97
-                        },
-                        {
-                          "x": new Date("2020-12-17T23:59:59Z"),
-                          "y": 98
-                        },
-                        {
-                          "x": new Date("2020-12-18T23:59:59Z"),
-                          "y": 99
-                        },
-                        {
-                          "x": new Date("2020-12-19T23:59:59Z"),
-                          "y": 95
-                        },
-                        {
-                          "x": new Date("2020-12-20T23:59:59Z"),
-                          "y": 92
-                        }
-                      ]
-           };
+                  data : props.reliability
+                };
+     }else{
+      this.state = {
+                  data : [
+                             {
+                               "x":  new Date("2020-12-11T23:59:59Z"),
+                               "y": 87
+                             },
+                             {
+                               "x": new Date("2020-12-12T23:59:59Z"),
+                               "y": 97
+                             },
+                             {
+                               "x": new Date("2020-12-13T23:59:59Z"),
+                               "y": 89
+                             },
+                             {
+                               "x": new Date("2020-12-14T23:59:59Z"),
+                               "y": 97
+                             },
+                             {
+                               "x": new Date("2020-12-15T23:59:59Z"),
+                               "y": 99
+                             },
+                             {
+                               "x": new Date("2020-12-16T23:59:59Z"),
+                               "y": 97
+                             },
+                             {
+                               "x": new Date("2020-12-17T23:59:59Z"),
+                               "y": 98
+                             },
+                             {
+                               "x": new Date("2020-12-18T23:59:59Z"),
+                               "y": 99
+                             },
+                             {
+                               "x": new Date("2020-12-19T23:59:59Z"),
+                               "y": 95
+                             },
+                             {
+                               "x": new Date("2020-12-20T23:59:59Z"),
+                               "y": 92
+                             }
+                           ]
+                };
+     }
+
 
    }
 
   componentDidMount() {
-    const responseChart = fetch('http://localhost:5000/aztecs/dashboards?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
+    const responseChart = fetch('http://localhost:5000/aztecs/reliability?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
                       .then(response => response.json())
                       .then(response_data => {
                       console.log(response_data.reliability)
@@ -92,6 +99,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 			const options = {
     			animationEnabled: true,
     			exportEnabled: true,
+    			zoomEnabled: true,
     			theme: "light1",
     			title:{
     				text: "Reliability",

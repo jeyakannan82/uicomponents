@@ -66,15 +66,15 @@ var CanvasJS = CanvasJSReact.CanvasJS;
    }
 
   componentDidMount() {
-    const responseChart = fetch('http://localhost:5000/aztecs/dashboards?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
+    const responseChart = fetch('http://localhost:5000/aztecs/availability?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
                       .then(response => response.json())
                       .then(response_data => {
                     var dataPoints = [];
-                    for(var cnt = 0 ;cnt<response_data.reliability.length;cnt++ )
+                    for(var cnt = 0 ;cnt<response_data.availability.length;cnt++ )
                     {
 
                               dataPoints.push({
-                                                 x: new Date(response_data.reliability[cnt].x),
+                                                 x: new Date(response_data.availability[cnt].x),
                                                  y: 100
                                                });
 
@@ -90,6 +90,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 		const data_points = this.state.data;
 			const options = {
     			animationEnabled: true,
+    			zoomEnabled: true,
     			exportEnabled: true,
     			theme: "light2",
     			title:{
