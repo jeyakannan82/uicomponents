@@ -34,7 +34,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
    }
 
   componentWillMount() {
-    const upTimeResponse = fetch('http://localhost:5000/aztecs/upTime?countryTotal=IN')
+    const upTimeResponse = fetch('http://localhost:5000/aztecs/upTime?start_date=' + encodeURIComponent(this.props.startExpDate) +'&end_date=' + encodeURIComponent(this.props.endExpDate))
                       .then(response => response.json())
                       .then(response_data => {
                         this.setState({ data : response_data.upTime })

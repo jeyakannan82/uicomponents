@@ -20,19 +20,28 @@ import DateTimePicker from 'react-datetime-picker';
 import "../assets/range-date-picker.css";
 import getDashboardData from '../hooks/getDashboardData';
 import GoodExperience from "../components/GoodExperience"
+import BadExperience from "../components/BadExperience"
 import AverageExperience from "../components/AverageExperience"
-
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
+import moment from 'moment';
 import ExpandableTableComponent from "../components/ExpandableTableComponent";
 
-const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badExp }) => {
+
+const CustomerExperience = ({ smallStats , goodExp, tabToggle, averageExp, badExp, props }) => {
 const [activityByAction, experience, reliability, availability,response] = getDashboardData();
-const [value, onChange] = useState(new Date());
+const [startExpDate, setStartExpDate] = React.useState(new Date());
+const [endExpDate, setEndExpDate] = React.useState(new Date());
+const [expValue, onChange] = React.useState([new Date(), new Date()]);
 const { className } =  React.useState(0);
 const classes = classNames(className, "d-flex", "my-auto", "date-range");
-const onRefresh = useCallback(async () => {
- window.location.reload(false);
 
-  }, [activityByAction, experience, reliability, availability,response]);
+ React.useEffect(
+    () => {
+      setStartExpDate(moment(expValue[0]).format("YYYY-MM-DD HH:mm:ss"))
+      setEndExpDate(moment(expValue[1]).format("YYYY-MM-DD HH:mm:ss"))
+    },
+    [startExpDate, endExpDate, expValue]
+  );
  return ( <Container  className="">
     {/* Page Header */}
       <Row noGutters className="page-header py-4">
@@ -43,11 +52,7 @@ const onRefresh = useCallback(async () => {
 
         {/* Users by Device */}
         <Col  lg="6" md="12" sm="12" className="text-sm-right mb-4">
-           <InputGroup className={classes}>
-              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
-              <DateTimePicker onChange={onChange} value={value} className="text-center"/>
-              <InputGroupAddon type="append"> <Button theme="secondary" onClick={onRefresh}>Check</Button></InputGroupAddon>
-            </InputGroup>
+          <DateTimeRangePicker onChange={onChange} value ={expValue} className="text-center"/>
         </Col>
       </Row>
 
@@ -74,16 +79,16 @@ const onRefresh = useCallback(async () => {
     <Row>
      {/* Success Failure Chart*/}
           <Col lg="4" md="4" sm="4" className="mb-4">
-                                   <SuccessChart />
+                                   <SuccessChart startExpDate={startExpDate} endExpDate = {endExpDate} expDates ={expValue} key={expValue} />
            </Col>
        {/* UpTime DownTime Chart */}
        <Col lg="4" md="4" sm="4" className="mb-4">
-        <UpTimeChart />
+        <UpTimeChart startExpDate={startExpDate} endExpDate = {endExpDate} expDates ={expValue} key={expValue} />
        </Col>
 
        {/* Action Type Chart */}
        <Col lg="4" md="4" sm="4" className="mb-4">
-       <SearchTypeChart />
+       <SearchTypeChart startExpDate={startExpDate} endExpDate = {endExpDate} expDates ={expValue} key={expValue} />
        </Col>
     </Row>
     <CardBody className="p-0">
@@ -138,7 +143,7 @@ const onRefresh = useCallback(async () => {
                             </th>
                           </tr>
                         </thead>
-                       <GoodExperience />
+                       <GoodExperience startExpDate={startExpDate} endExpDate = {endExpDate} expDates ={expValue} key={expValue} />
                 </table>
         </Tab.Pane>
         <Tab.Pane eventKey="second">
@@ -173,12 +178,43 @@ const onRefresh = useCallback(async () => {
                             </th>
                           </tr>
                         </thead>
-                      <AverageExperience />
+                      <AverageExperience startExpDate={startExpDate} endExpDate = {endExpDate} expDates ={expValue} key={expValue} />
                 </table>
         </Tab.Pane>
         <Tab.Pane eventKey="third">
   {/* Countries Table List */}
-<ExpandableTableComponent />
+ <table className="table table-light mb-0">
+
+                        <thead className="experience">
+                          <tr>
+                            <th scope="col" className="border-0">
+                              User Perm ID
+                            </th>
+                            <th scope="col" className="border-0">
+                              Origin
+                            </th>
+                            <th scope="col" className="border-0">
+                              Response
+                            </th>
+                            <th scope="col" className="border-0">
+                              Failed Count
+                            </th>
+                            <th scope="col" className="border-0">
+                              Success Count
+                            </th>
+                            <th scope="col" className="border-0">
+                              User Failures
+                            </th>
+                            <th scope="col" className="border-0">
+                              User Experience
+                            </th>
+                            <th scope="col" className="border-0">
+                             Meet Expectation
+                            </th>
+                          </tr>
+                        </thead>
+                      <BadExperience startExpDate={startExpDate} endExpDate = {endExpDate} expDates ={expValue} key={expValue} />
+                </table>
         </Tab.Pane>
       </Tab.Content>
     </Col>
@@ -193,7 +229,10 @@ CustomerExperience.propTypes = {
   /**
    * The small stats dataset.
    */
-  smallStats: PropTypes.array
+    smallStats: PropTypes.array,
+    expDates : PropTypes.array,
+    startExpDate: PropTypes.object,
+    endExpDate: PropTypes.object,
 
 };
 

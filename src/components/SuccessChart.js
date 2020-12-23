@@ -39,11 +39,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
    }
 
   componentWillMount() {
-  console.log("startDate: ");
-   console.log(this.state.startDate);
-   console.log("endDate: ");
-      console.log(this.state.endDate);
-    const successResponse = fetch('http://localhost:5000/aztecs/successRate?countryTotal=IN&startDate='+this.state.endDate+'&endDate='+this.state.endDate)
+    const successResponse = fetch('http://localhost:5000/aztecs/successRate?start_date=' + encodeURIComponent(this.props.startExpDate) +'&end_date=' + encodeURIComponent(this.props.endExpDate))
                       .then(response => response.json())
                       .then(response_data => {
                         this.setState({ data : response_data.successRate })

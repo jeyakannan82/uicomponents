@@ -47,7 +47,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 
   componentWillMount() {
 
-    const successResponse = fetch('http://localhost:5000/aztecs/category?countryTotal=IN')
+    const successResponse = fetch('http://localhost:5000/aztecs/category?start_date=' + encodeURIComponent(this.props.startExpDate) +'&end_date=' + encodeURIComponent(this.props.endExpDate))
                       .then(response => response.json())
                       .then(response_data => {
                         this.setState({ data : response_data.category })

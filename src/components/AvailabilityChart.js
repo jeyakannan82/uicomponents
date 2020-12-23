@@ -66,7 +66,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
    }
 
   componentDidMount() {
-    const responseChart = fetch('http://localhost:5000/aztecs/availability?start_date=' + encodeURIComponent(this.props.dates[0]) +'&end_date=' + encodeURIComponent(this.props.dates[1]))
+  console.log('http://localhost:5000/aztecs/availability?start_date=' + encodeURIComponent(this.props.startDate) +'&end_date=' + encodeURIComponent(this.props.endDate));
+    const responseChart = fetch('http://localhost:5000/aztecs/availability?start_date=' + encodeURIComponent(this.props.startDate) +'&end_date=' + encodeURIComponent(this.props.endDate))
                       .then(response => response.json())
                       .then(response_data => {
                     var dataPoints = [];

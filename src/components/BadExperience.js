@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import {  Table } from "semantic-ui-react";
 
- class GoodExperience extends React.Component {
+ class BadExperience extends React.Component {
 
    constructor(props) {
      super(props);
@@ -13,11 +13,11 @@ import {  Table } from "semantic-ui-react";
 
    }
        componentWillMount() {
-         const goodExpResponse = fetch('http://localhost:5000/aztecs/goodExperience?start_date=' + encodeURIComponent(this.props.startExpDate) +'&end_date=' + encodeURIComponent(this.props.endExpDate))
+         const goodExpResponse = fetch('http://localhost:5000/aztecs/badExperience?start_date=' + encodeURIComponent(this.props.startExpDate) +'&end_date=' + encodeURIComponent(this.props.endExpDate))
                            .then(response => response.json())
                            .then(response_data => {
                              console.log(response_data);
-                             this.setState({ data : response_data.goodExperience })
+                             this.setState({ data : response_data.badExperience })
                              return response_data;
                            });
   }
@@ -43,4 +43,4 @@ render() {
   }
 }
 
- export default GoodExperience;
+ export default BadExperience;

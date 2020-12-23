@@ -29,13 +29,23 @@ import moment from 'moment';
 
 const Dashboard = ({ smallStats , custStats , polarChartData, props}) => {
 const [activityByAction, experience, reliability, availability,response] = getDashboardData();
-const [startDate, setStartDate] = React.useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"));
-const [endDate, setEndDate] = React.useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"));
-const [value, onChange] = React.useState([new Date(), new Date()]);
+const [startDate, setStartDate] = React.useState(new Date());
+const [endDate, setEndDate] = React.useState(new Date());
+const [value, setValue] = React.useState([new Date(), new Date()]);
 
 const { className } =  React.useState(0);
 const classes = classNames(className, "d-flex", "my-auto", "date-range");
+const onChange = (e) => {
+  setValue(e);
+  }
 
+ React.useEffect(
+    () => {
+      setStartDate(moment(value[0]).format("YYYY-MM-DD HH:mm:ss"));
+      setEndDate(moment(value[1]).format("YYYY-MM-DD HH:mm:ss"));
+    },
+    [startDate, endDate, value]
+  );
 return(
   <Container  className="">
     {/* Page Header */}
@@ -53,28 +63,28 @@ return(
     <Row>
       {/* Reliability Chart*/}
            <Col lg="4" md="4" sm="4" className="mb-4">
-          <ReliabilityChart dates ={value} key={value} />
+          <ReliabilityChart startDate={startDate} endDate = {endDate} dates ={value} key={value} />
             </Col>
         {/* Availability Chart */}
         <Col lg="4" md="4" sm="4" className="mb-4">
-         <AvailabilityChart dates ={value} key={value} />
+         <AvailabilityChart startDate={startDate} endDate = {endDate} dates ={value} key={value} />
         </Col>
 
         {/* Response Chart */}
         <Col lg="4" md="4" sm="4" className="mb-4">
-        <ResponseChart dates ={value} key={value} />
+        <ResponseChart startDate={startDate} endDate = {endDate} dates ={value} key={value} />
         </Col>
      </Row>
 
     <Row>
 
       <Col lg="8" md="12" sm="12" className="mb-4">
-         <CustomerSatisfactionScore dates ={value} key={value} />
+         <CustomerSatisfactionScore startDate={startDate} endDate = {endDate} dates ={value} key={value} />
       </Col>
 
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
-        <ResponseByService dates ={value} key={value} />
+        <ResponseByService startDate={startDate} endDate = {endDate} dates ={value} key={value} />
       </Col>
     </Row>
 
@@ -82,12 +92,12 @@ return(
 
       {/* Users by Device */}
       <Col lg="8" md="12" sm="12" className="mb-4">
-       <CustomerExperienceTrend dates ={value} key={value} />
+       <CustomerExperienceTrend startDate={startDate} endDate = {endDate} dates ={value} key={value} />
       </Col>
 
       {/* Users by Device */}
       <Col lg="4" md="6" sm="12" className="mb-4">
-        <NPSScore dates={value} key={value} />
+        <NPSScore startDate={startDate} endDate = {endDate} dates={value} key={value} />
       </Col>
      </Row>
   </Container>);

@@ -13,7 +13,7 @@ import {  Table } from "semantic-ui-react";
 
    }
        componentWillMount() {
-         const goodExpResponse = fetch('http://localhost:5000/aztecs/experience?countryTotal=IN')
+         const goodExpResponse = fetch('http://localhost:5000/aztecs/averageExperience?start_date=' + encodeURIComponent(this.props.startExpDate) +'&end_date=' + encodeURIComponent(this.props.endExpDate))
                            .then(response => response.json())
                            .then(response_data => {
                              console.log(response_data);
